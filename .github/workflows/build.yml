@@ -9,9 +9,10 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Clone Repository
+      - name: Prepare Repository
         run: |
-          git clone https://github.com/${{ github.repository }}.git .
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git fetch origin ${{ github.ref_name }} || git fetch origin main
           git checkout ${{ github.sha }}
 
       - name: Set up JDK 17
