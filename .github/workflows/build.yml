@@ -24,6 +24,14 @@ jobs:
         with:
           gradle-version: '8.9'
 
-      - name: Locate Gradle project root
-        id: locate
-        run: |
+      - name: Grant Permission for Gradle Wrapper
+        run: chmod +x gradlew
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CricketScorePro-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
